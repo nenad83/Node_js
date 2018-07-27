@@ -136,7 +136,7 @@
 
 
 
-var house = {
+var house = {					//da se kreiraat 10 razlicni objekti da se stavat vo niza i da se ispecatat onie koi se flat povrsina pomala od 60 i cena pomala od 1000
 	type: "house/flat"
 	m2: "50",				//<60m2
 	price_m2: "1000",		//< 1000
