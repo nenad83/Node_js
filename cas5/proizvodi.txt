@@ -1,0 +1,4 @@
+banana 10
+juice 50
+milk 50
+chocolate 80
