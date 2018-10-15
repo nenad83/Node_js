@@ -1,65 +1,44 @@
 var mongoose = require("mongoose");
 
-var CVS = mongoose.model(
-	"cvs",
+var Users = mongoose.model(
+	"users",
 	new mongoose.Schema({
-		     "first_name": String,
-    		 "last_name": String,
-     		 "birth_date": Number,
-    		 "email": String,
-     		 "phone": String,
-     		 "current_residence": {
-        		 "country": String,
-        	 	"city": String,
-         		"zip_code": Number
-     },
-    	     "education": [
-         {
-             "school_name": String,
-             "level": String,
-             "degree": String,
-             "start_at": Date,
-             "finish_at": Date
-         }
-     ],
-     "work_expiriance": [
-     	{
-     		"position": String,
-     		"job_description": String,
-     		"tags": [String],
-     		"Company": String,
-     		"start_at": Date,
-     		"finish_at": Date
-			}
-     ]
-
+		"firstName" : String, 
+	    "lastName" : String, 
+	    "email" : String,
+	    "password": String,
+	    "role": String, 
+	    "location" : {
+	        "country" : String, 
+	        "city" : String, 
+	        "municipality" : String
+	    }
 	})
 );
 
-
-var getAllCvs = (cb) => {
-	CVS.find({}, (err, data) => {
-		if(err) {
+var getAllUsers = (cb) => {
+	Users.find({},{password: -1}, (err, data) => {
+		if (err){
 			return cb(err, null);
 		} else {
-			return cb(null, data)
-		};
+			return cb(null, data);
+		}
 	});
 };
 
-var getCvsByName = (name, cb) => {
-	CVS.find({first_name: name}, (err, data) => {
+var getUserByEmail = (email, cb) => {
+	CVS.find({email: email}, {password: 1, role: 1, firstName: 1, lastName: 1, email: 1}, (err, data) => {
 		if(err) {
 			return cb(err, null);
 		} else {
-			return cb(null, data)
-		};
-	});
+			return cb(null, data);
+		}
+	})
 };
 
-var deleteCvsById = (id, cb) => {
-	CVS.deleteOne({_id: id}, (err, data) => {
-		if(err) {
+var getUsersByName = (name, cb) => {
+	Users.find({firstName: name}, (err, data) => {
+		if(err){
 			return cb(err, null);
 		} else {
 			return cb(null, data)
@@ -67,20 +46,42 @@ var deleteCvsById = (id, cb) => {
 	});
 };
 
-var createCv = (userData, cb) => {
-	var user = new CVS(userData);
+
+var createUser = (userData, cb) => {
+	var user = new Users(userData);
 	user.save((err, data) => {
 		if(err) {
 			return cb(err);
 		} else {
 			return cb(null);
 		}
+	});
+};
+
+
+var deleteUser = (name, cb) => {
+	user.deleteOne({firstName: name}, (err) => {
+		if(err) {
+			return cb(err);
+		} else {
+			return cb(null);
+		}
+	})
+
+}
+
+var deleteById = (id, cb) => {
+	Users.deleteOne({_id: id}, (err) => {
+		if(err) {
+			return cb(er);
+		} else {
+			return cb(null);
+		}
 	})
 }
 
-
 var updateById = (id, data, cb) => {
-	CVS.updateOne({_id: id}, data, (err) => {
+	Users.updateOne({_id: id}, data, (err) => {
 		if(err) {
 			return cb(err);
 		} else {
@@ -89,10 +90,14 @@ var updateById = (id, data, cb) => {
 	})
 }
 
+
+ 
 module.exports = {
-	getAllCvs,
-	deleteCvsById,
-	createCv,
+	getAllUsers,
+	getUsersByName,
+	createUser,
+	deleteUser,
+	deleteById,
 	updateById,
-	getCvsByName
-};
+	getUserByEmail
+}

@@ -6,6 +6,7 @@ var mongo = require("./db/mongo");
 var root = require("./handlers/root");
 var auth = require("./handlers/auth");
 var cvs = require("./handlers/cvs");
+var users = require("./handlers/users");
 
 
 mongo.Init();
@@ -16,7 +17,10 @@ app.use(bodyParser.json());
 app.use(jwt({
 		secret: "pero_e_haker"
 	}).unless({
-	path:["/login"]
+	path:["/login", 
+		{url: "/users", methods: ["POST"]},
+		{url: "/login", methods: ["POST"]}
+	]
 	})
 );
 
@@ -30,6 +34,10 @@ app.get("/cvs/name/:name", cvs.getCvsByName);
 app.delete("/cvs/delete/:id", cvs.deleteCvsById);
 app.post("/cvs/create", cvs.createCv);
 app.put("/cvs/:id", cvs.updateById);
+
+
+app.get("/users", users.getAllUsers);
+app.post("/users", users.createUser);
 
 
 

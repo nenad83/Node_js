@@ -38,13 +38,23 @@ var CVS = mongoose.model(
 
 
 var getAllCvs = (cb) => {
-	CVS.find({}, (err, data) => {
+	CVS.find({},{password: -1}, (err, data) => {
 		if(err) {
 			return cb(err, null);
 		} else {
 			return cb(null, data)
 		};
 	});
+};
+
+var getCvByEmail = (email, cb) => {
+	CVS.find({email: email}, {password: 1, role: 1, first_name: 1, last_name: 1, email: 1}, (err, data) => {
+		if(err) {
+			return cb(err, null);
+		} else {
+			return cb(null, data);
+		}
+	})
 };
 
 var getCvsByName = (name, cb) => {
@@ -94,5 +104,6 @@ module.exports = {
 	deleteCvsById,
 	createCv,
 	updateById,
-	getCvsByName
+	getCvsByName,
+	getCvByEmail
 };
