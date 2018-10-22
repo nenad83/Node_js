@@ -1,5 +1,7 @@
 var users = require("../models/users");
 var bcrypt = require("bcryptjs");
+var validator = require("fastest-validator");
+ 
 
 var getAllUsers = (req, res)=> {
 	users.getAllUsers((err, data)=> {
@@ -25,28 +27,44 @@ var getUserByName = (req, res) => {
 }
 
 var createUser = (req, res) => {
-	var valid = req.body.firstName != undefined && req.body.firstName != ""
-				&& req.body.lastName != undefined && req.body.lastName != ""
-				&& req.body.email != undefined && req.body.email != ""
-				&& req.body.password != undefined && req.body.password != "";
-	if(valid) {			
-	bcrypt.hash(req.body.password, 10, (err, hash) => {
-		var userData = req.body;
-		userData.password = hash;
-		userData.role = "user;"
-		users.createUser(userData, (err) => {
-		if(err) {
-			res.send(err);
-		} else {
-			res.status(201).send("OK");
-		}
-	})
-	
-	});
-	} else {
-		res.status(400).send("Bed request");
-	}
-};
+	// if(req.body.email == userData.email){
+	// 	res.status(400).send("User alredy registered");
+	// } else {
+	// var emailExists = req.body.email != userData.email;
+    // var valid = req.body.firstName != undefined && req.body.firstName != ""
+    //             && req.body.lastName != undefined && req.body.lastName != ""
+    //             && req.body.email != undefined && req.body.email != "" 
+    //             // && req.body.email != userData.email
+    //             && req.body.password != undefined && req.body.password != "";
+    var schema = {
+    	firstName: {type: "string", empty: false},
+    	lastName: {type: "string", empty: false},
+    	email: {type: "email", empty: false},
+    	password: {type: "string", min: 8, max: 16, empty: false}
+    }
+
+    let v = new validator();
+    var valid = v.validate(req.body, schema)
+
+    if(valid === true) {
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+            var userData = req.body;
+            userData.password = hash;
+            userData.role = 'user';
+            users.createUser(userData, (err) => {
+                if(err) {
+                    res.send(err);
+                } else {
+                    res.status(201).send("OK");
+              
+                }
+            });
+        });
+    } else {
+        res.status(400).send(valid);
+    }
+    // }
+}
 
 var deleteUser = (req, res) => {
 	var name = req.params.name;

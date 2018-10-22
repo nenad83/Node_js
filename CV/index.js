@@ -17,9 +17,11 @@ app.use(bodyParser.json());
 app.use(jwt({
 		secret: "pero_e_haker"
 	}).unless({
-	path:["/login", 
+	path:[ 
 		{url: "/users", methods: ["POST"]},
-		{url: "/login", methods: ["POST"]}
+		{url: "/login", methods: ["POST"]},
+		// {url: "/email", methods: ["GET"]},
+		{url: "/users", methods: ["GET"]}
 	]
 	})
 );
@@ -28,6 +30,7 @@ app.get("/", root.home);
 
 app.post("/login", auth.login);
 app.post("/logout", auth.logout);
+// app.get("/email", auth.getUsersByEmail);
 
 app.get("/cvs", cvs.getAllCvs);
 app.get("/cvs/name/:name", cvs.getCvsByName);
