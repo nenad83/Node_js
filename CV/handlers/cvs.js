@@ -40,48 +40,59 @@ var createCv = (req, res) => {
 	 var schema = {
     	first_name: {type: "string", empty: false},
     	last_name: {type: "string", empty: false},
-    	birth_date: {type: "number", empty:false},
+    	birth_date: {type: "number", empty: false},
     	email: {type: "email", empty: false},
     	password: {type: "string", min: 3, max: 16, empty: false},
     	phone: {type: "string", empty: false},
-    	current_residence: {type: "array", items: {
-    		type "objects", props: {
-	    	country: {type: "string", empty: false},
-	    	city: {type: "string", empty: false},
-	    	zip_code: {type: "string", empty: false}
+    	current_residence: {
+    		type: "array", items: {
+    			type: "object", props: {
+	    			country: {type: "string", empty: false},
+	    			city: {type: "string", empty: false},
+	    			zip_code: {type: "string", empty: false}
+    			}
+    		}
+    	},
+    	education: {
+    		type: "array", items: {
+    			type: "object", props: {
+	    			school_name: {type: "string"},
+			    	level: {type: "string"},
+			    	degree: {type: "string"},
+			    	start_at: {type: "date"},
+			    	finish_at_name: {type: "date"}
+    			}
+    		}
+    	},
+    	work_expiriance: {
+    		type: "array", items: {
+    			type: "object", props: {
+	    			postition: {type: "string"},
+			    	job_description: {type: "string"},
+			    	tags: {type: "string"},
+			    	company: {type: "string"},
+			    	start_at: {type: "date"},
+			    	finish_at: {type: "string"}
+			    }
     		}
     	}
-    	education: {type: "array", items: {
-    		type "objects", props: {
-	    	school_name: {type: "string"},
-	    	level: {type: "string"},
-	    	degree: {type: "string"},
-	    	start_at: {type: "date"},
-	    	finish_at_name: {type: "date"}
-    		}
-    	}}
-    	work_expiriance: {type: "array", items: {
-    		type "objects", props: {
-	    	postition: {type: "string"},
-	    	job_description: {type: "string"},
-	    	tags: {type: "string"},
-	    	company: {type: "string"},
-	    	start_at: {type: "date"},
-	    	finish_at: {type: "string"}
-    		}
-    	}
-    }
+    };
 
-    var valid = v.validate(req.body, schema)
-	// console.log(req.body);
+
+	var cvData = formatDates(req.body);
+
+	if(valid === true) {
 	cvs.createCv(req.body, (err) => {
 		if(err) {
 			res.send(err);
 		} else {
 			res.status(201).send("User Created");
-		}
-	})
-}
+			}
+		})
+	} else {
+		res.status(400).send(valid);
+	}
+};
 
 
 var updateById = (req, res) => {

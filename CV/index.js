@@ -3,10 +3,13 @@ var bodyParser = require("body-parser");
 var jwt = require('express-jwt');
 var mongoose = require("mongoose");
 var mongo = require("./db/mongo");
+var fileUpload = require("express-fileupload");
 var root = require("./handlers/root");
 var auth = require("./handlers/auth");
 var cvs = require("./handlers/cvs");
 var users = require("./handlers/users");
+var upload = require("./handlers/upload");
+
 
 
 mongo.Init();
@@ -21,10 +24,16 @@ app.use(jwt({
 		{url: "/users", methods: ["POST"]},
 		{url: "/login", methods: ["POST"]},
 		// {url: "/email", methods: ["GET"]},
-		{url: "/users", methods: ["GET"]}
+		{url: "/users", methods: ["GET"]},
+		{url: "/upload", methods: ["POST"]}
 	]
 	})
 );
+
+app.use(fileUpload({
+  limits: { 
+  	fileSize: 50 * 1024 * 1024 },
+}));
 
 app.get("/", root.home);
 
@@ -41,6 +50,8 @@ app.put("/cvs/:id", cvs.updateById);
 
 app.get("/users", users.getAllUsers);
 app.post("/users", users.createUser);
+
+app.post("/upload", upload.uploadFile);
 
 
 
