@@ -25,11 +25,11 @@ var getAllUsers = (cb) => {
 };
 
 var getUsersByName = (name, cb) => {
-	Users.find({firstName: name}, (err, data) => {
+	Users.find({firstName: name}, (err) => {
 		if(err){
-			return cb(err, null);
+			return cb(err);
 		} else {
-			return cb(null, data)
+			return cb(null)
 		}
 	});
 };

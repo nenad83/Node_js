@@ -1,0 +1,214 @@
+body {
+        background-image: url("hyboria.jpg");
+        background-size: 100% 100%;
+    }
+    .main {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        opacity: .9;
+        padding: auto;
+        margin: auto;
+        height: 1000px;
+        width: 50%;
+        border: 2px solid red;
+    }
+    .info {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 550px;
+    }
+    .main .info h3 {
+        padding: 5px;
+        margin: 0;
+        font-size: 30px;
+        color: white;
+        text-align: center;
+    }
+    .main .info p {
+        padding: 20px;
+        margin: 0;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+
+    }
+    .main .info img {
+        padding: auto;
+        margin: 15px auto 0 auto;
+        display: block;
+        border: 1px solid yellow;
+    }
+    .main .info button {
+        padding: 0;
+        margin: 0;
+        display: block;
+        margin: 0 auto;
+        background-color: red;
+        border: 1px solid yellow;
+        font-size: 16px;
+        color: white;
+        width: 150px;
+        height: 35px; 
+    }
+    #bmale {
+        margin: 0 200px;
+        padding: 0;
+        /*float: right;*/
+        display: inline-block;
+        width: 150px;
+        height: 20px;
+    }
+    #bfemale {
+        margin: 0;
+        padding: 0;
+        display: inline;
+        width: 150px;
+        height: 20px;        
+    }
+
+    .combat {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 450px;
+    }
+    .combat .vitality {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 200px;
+        background-color: black;
+    }
+    .combat .vitality h2 {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        padding: 80px 150px 0 150px;
+        font-size: 30px;
+        color: white;
+    }
+    .combat .battle p{
+        margin: 0; 
+        padding: 0;
+        text-align: center;
+        color: white;
+        font-size: 19px;
+    }
+    .combat .battle button {
+        padding: 0;
+        margin: 0;
+        display: block;
+        margin: 0 auto; 
+        background-color: red;
+        border: 1px solid yellow;
+        font-size: 16px;
+        color: white;
+        width: 70px;
+        height: 40px;   
+    }
+    #bfitness {
+        padding: 0;
+        margin: ;
+        display: block;
+        margin: 10px 0 0 670px; 
+        background-color: red;
+        border: 1px solid yellow;
+        font-size: 16px;
+        color: white;
+        width: 70px;
+        height: 40px;  
+    }
+
+
+                                /*MONSTERS*/
+
+
+
+ .monsters {
+    margin: 0 10px 0 0;
+    padding: 0;
+    height:200px;
+    width: 450px;
+    float: right;
+    background-color: black;
+    border: 1px solid red;
+    opacity: .9;
+    display: inline-block;
+ } 
+ .monsters h2 {
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+ }
+
+  .monsters h3 {
+    margin: 0;
+    padding: 10px 0 0 0;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+ }
+ .monsters button {
+        padding: 0;
+        margin: 0;
+        display: block;
+        margin: 0 auto;
+        background-color: red;
+        border: 1px solid yellow;
+        font-size: 16px;
+        color: white;
+        width: 150px;
+        height: 35px; 
+ }
+ .monsters p {
+    padding: 0;
+    margin: 0;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+
+ }
+
+ .diceroller {
+    margin: 0 10px 0 0;
+    padding: 0;
+    height:300px;
+    width: 450px;
+    float: left;
+    background-color: black;
+    border: 1px solid red;
+    opacity: .9;
+    display: inline-block;    
+ }
+
+  .diceroller h2 {
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+ }
+  .diceroller button {
+        padding: 0;
+        margin: 5px 0 0 40px;
+        display: inline-block;
+        background-color: red;
+        border: 1px solid yellow;
+        font-size: 16px;
+        color: white;
+        width: 150px;
+        height: 35px; 
+}
+
+ .diceroller p {
+    padding: 20px 0 0 0;
+    margin: 0;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+
+ }
